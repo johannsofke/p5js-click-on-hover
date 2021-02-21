@@ -1,51 +1,29 @@
 /* eslint-disable no-undef, no-unused-vars */
-let x = 200;
-let y = 200;
-let start = 0;
-let stop = 0;
-let isClick = false;
-
 function setup() {
   createCanvas(400, 400);
   rectMode(CENTER);
   angleMode(DEGREES);
   smooth();
+  pa1 = createProgressArc(200, 200);
+  pa2 = createProgressArc(300, 200, 200, "red", 10);
 }
 
 function draw() {
-  console.log("hallo");
   background("white");
 
-  let isHover = mouseX > 175 && mouseX < 225 && mouseY > 175 && mouseY < 225;
+  isClick1 = pa1.update();
+  if (isClick1) {
+    fill("blue");
+  } else {
+    fill("red");
+  }
+  square(200, 200, 50);
 
-  if (isClick === true) {
+  isClick2 = pa2.update();
+  if (isClick2) {
     fill("black");
   } else {
     fill("red");
   }
-  square(x, y, 50);
-
-  if (isHover && !isClick) {
-    push();
-    stroke("green");
-    noFill();
-    circle(200, 200, 100);
-    strokeWeight(5);
-    strokeCap(SQUARE);
-    stop = stop + 10;
-    arc(x, y, 100 - 5, 100 - 5, start - 90, stop - 90);
-
-    if (stop >= 360) {
-      isClick = true;
-      stop = 0;
-    } else {
-      isClick = false;
-    }
-    pop();
-  }
-
-  if (!isHover) {
-    isClick = false;
-    stop = 0;
-  }
+  square(300, 200, 50);
 }
